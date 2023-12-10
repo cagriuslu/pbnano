@@ -1,0 +1,37 @@
+syntax = "proto3";
+package m2.pb;
+
+enum TestEnum {
+  TEST_ENUM_A = 0;
+  TEST_ENUM_B = 1;
+  TEST_ENUM_C = 2147483646;
+  TEST_ENUM_D = 2147483647;
+}
+
+message TestSubmessage {
+  string a = 1;
+}
+
+message Test {
+  int32 a = 1; // 0
+  int64 b = 2; // -1
+  uint32 c = 3; // 12345678
+  uint64 d = 4; // 18446744073709551615
+  sint32 e = 5; // -12345678
+  sint64 f = 6; // 1
+  bool g = 7; // true
+  TestEnum h = 8; // TEST_ENUM_C (2147483646)
+  fixed32 i = 9; // 4294967295
+  fixed64 j = 10; // 281474976710655
+  sfixed32 k = 11; // 1
+  sfixed64 l = 12; // -1152921504606846975
+  float m = 13; // 1234.56
+  double n = 14; // -123456.789
+  string o = 15; // "Hello, world!"
+  bytes p = 16; // "\x30\x31\x32\x33"
+  TestSubmessage q = 17; // a:"Submessage"
+  repeated string r = 18; // "ABC", "DEF", "GHI"
+  repeated TestSubmessage s = 19; // a:"ABC", a:"DEF", a:"GHI"
+  repeated int32 t = 20 [packed=true]; // -2147483648, -1, 0, 1, 2147483647
+  repeated float u = 21 [packed=true]; // -1.0, 0, 1.0
+}
